@@ -1,11 +1,12 @@
-import torch
 import os
-from huggingface_hub import notebook_login
+
 import gradio as gr
+import torch
+
 from pipe import pipe
 
-
 model_id = "stabilityai/stable-diffusion-2-1-base"
+
 
 def interference(prompt="", num_inference_steps=50, guidance_scale=7.5, save_img=False, show_img=False):
     def prompt_builder(prompt):
@@ -35,9 +36,6 @@ def interference(prompt="", num_inference_steps=50, guidance_scale=7.5, save_img
         image.save(os.path.join("outputs", prompt_folder, f"{prompt}.png"))
     return image
 
-
-
-notebook_login()
 
 app = gr.Interface(
     fn=interference,
